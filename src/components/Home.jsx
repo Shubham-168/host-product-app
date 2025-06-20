@@ -1,24 +1,20 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import ProductCard from './ProductCard'
+import { useSelector } from 'react-redux';
+
+import ProductCard from './ProductCard';
 
 function Home() {
   const {productsList} = useSelector(state => state.products)
 
   return (
     <>
-    <h1 className='text-2xl text-black font-bold mt-30 ml-4 mb-2' >All Products</h1>
-      <ul className='bg-amber-100 flex flex-wrap justify-center list-none m-2 rounded mt-2 p-4'>
-          {productsList.map( productItem => (
-            
-            <ProductCard 
-            key={productItem.id}
-            cardDetails = {productItem}
-            />
-
+      <div className="p-8 bg-neutral-100 min-h-screen mt-18">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 ">All Products</h2>
+        <div className="flex flex-wrap  gap-6 items-center justify-center">
+          {productsList.map((product) => (
+            <ProductCard product={product} key={product.id} />
           ))}
-      </ul>
+        </div>
+      </div>
     </>
   )
 }
