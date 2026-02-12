@@ -1,13 +1,6 @@
-import { useNavigate } from 'react-router-dom'
-
 function ProductCard({ product }) {
-  const navigate = useNavigate()
-
   return (
-    <article
-      onClick={() => navigate(`/product/${product.id}`)}
-      className="cursor-pointer rounded-xl bg-white p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
-    >
+    <article className="rounded-xl bg-white p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
       <div className="relative mb-4 rounded-xl bg-gray-100 p-4">
         <img
           src={product.image}
@@ -23,15 +16,16 @@ function ProductCard({ product }) {
         </span>
       </div>
 
-      <h3 className="min-h-14 overflow-hidden text-2xl font-semibold leading-7 text-gray-900 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
+      <h3 className="min-h-14 text-2xl font-semibold leading-7 text-gray-900 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2] overflow-hidden">
         {product.title}
       </h3>
 
       <div className="mt-4 flex items-center justify-between gap-2">
         <p className="text-2xl font-semibold text-gray-900">${product.price.toFixed(2)}</p>
-        <span className="cursor-pointer text-lg font-medium text-gray-900 transition hover:text-black">
-          Buy now ↗
-        </span>
+        <button className="flex items-center gap-2 text-lg font-medium text-gray-900 transition hover:text-black">
+          Buy now
+          <span aria-hidden>↗</span>
+        </button>
       </div>
     </article>
   )

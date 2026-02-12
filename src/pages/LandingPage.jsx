@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useSearchParams } from 'react-router-dom'
 import Navbar from '../components/Navbar'
@@ -22,7 +22,6 @@ import {
 function LandingPage() {
   const dispatch = useDispatch()
   const [searchParams, setSearchParams] = useSearchParams()
-  const [viewMode, setViewMode] = useState('grid')
 
   const products = useSelector(selectProducts)
   const filteredProducts = useSelector(selectFilteredProducts)
@@ -67,19 +66,13 @@ function LandingPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      <div className="grid h-[calc(100vh-80px)] grid-cols-1 gap-6 overflow-hidden px-6 py-6 lg:grid-cols-[260px_1fr]">
+      <div className="grid grid-cols-1 gap-6 px-6 py-6 lg:grid-cols-[260px_1fr]">
         <Sidebar
           activeCategory={activeCategory}
           categoryCounts={categoryCounts}
           onCategoryChange={handleCategoryChange}
         />
-        <ProductGrid
-          products={filteredProducts}
-          totalProducts={products.length}
-          status={status}
-          viewMode={viewMode}
-          onChangeView={setViewMode}
-        />
+        <ProductGrid products={filteredProducts} totalProducts={products.length} status={status} />
       </div>
     </div>
   )

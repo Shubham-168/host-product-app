@@ -1,33 +1,24 @@
 import ProductCard from './ProductCard'
-import ProductListCard from './ProductListCard'
 import ProductSkeleton from './ProductSkeleton'
-import ViewToggle from './ViewToggle'
 
-function ProductGrid({ products, totalProducts, status, viewMode, onChangeView }) {
-  const isGrid = viewMode === 'grid'
-
+function ProductGrid({ products, totalProducts, status }) {
   return (
-    <section className="flex h-full flex-col overflow-hidden">
+    <section>
       <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-2xl font-medium text-gray-500 md:text-4xl">
+        <h2 className="text-4xl font-medium text-gray-500">
           Showing <span className="font-semibold text-gray-900">"{products.length} results"</span> from{' '}
           {totalProducts}
         </h2>
-        <ViewToggle viewMode={viewMode} onChangeView={onChangeView} />
+        <div className="hidden items-center overflow-hidden rounded-lg border border-gray-300 bg-white sm:flex">
+          <button className="bg-lime-300 px-3 py-2 text-gray-900">▦</button>
+          <button className="px-3 py-2 text-gray-500">☰</button>
+        </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto pr-1">
-        <div className={isGrid ? 'grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4' : 'flex flex-col gap-6'}>
-          {status === 'loading'
-            ? Array.from({ length: 8 }).map((_, index) => <ProductSkeleton key={index} />)
-            : products.map((product) =>
-                isGrid ? (
-                  <ProductCard key={product.id} product={product} />
-                ) : (
-                  <ProductListCard key={product.id} product={product} />
-                ),
-              )}
-        </div>
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+        {status === 'loading'
+          ? Array.from({ length: 8 }).map((_, index) => <ProductSkeleton key={index} />)
+          : products.map((product) => <ProductCard key={product.id} product={product} />)}
       </div>
     </section>
   )
